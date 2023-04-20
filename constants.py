@@ -1,0 +1,16 @@
+import pygame
+import random
+import os
+
+# Constants
+WIDTH = 800
+HEIGHT = 600
+FPS = 60
+SPACESHIP_SPEED = 2
+BULLET_SPEED = 10
+ENEMY_SPEED = 2
+ASTEROID_SPEED = 4
+MIN_BULLET_INTERVAL = 200
+
+# Colors
+WHITE = (255, 255, 255)
