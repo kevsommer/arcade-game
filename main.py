@@ -19,7 +19,7 @@ space_background = pygame.image.load(
 
 
 class SpriteHandler():
-    def __init__(self, screen) -> None:
+    def __init__(self, screen, game_state_handler) -> None:
         self.screen = screen
 
         self.all_sprites = pygame.sprite.Group()
@@ -27,6 +27,7 @@ class SpriteHandler():
         self.enemies = pygame.sprite.Group()
         self.asteroids = pygame.sprite.Group()
         self.spaceship = Spaceship(screen, self)
+        self.game_state_handler = game_state_handler
 
     def draw(self):
         self.all_sprites.draw(self.screen)
@@ -37,11 +38,15 @@ class SpriteHandler():
 
     def check_collisions(self):
         # Check for collisions
-        pygame.sprite.groupcollide(
+        asteroid_collisions = pygame.sprite.groupcollide(
             self.bullets, self.asteroids, True, True)
 
-        pygame.sprite.groupcollide(
+        self.game_state_handler.update_score(len(asteroid_collisions))
+
+        enemy_collisions = pygame.sprite.groupcollide(
             self.bullets, self.enemies, True, True)
+
+        self.game_state_handler.update_score(len(enemy_collisions) * 2)
 
     def add_bullet(self, bullet):
         self.all_sprites.add(bullet)
@@ -56,13 +61,25 @@ class SpriteHandler():
         self.asteroids.add(asteroid)
 
 
+class GameStateHandler():
+    def __init__(self) -> None:
+        self.score = 0
+        self.lives = 3
+
+    def update_score(self, amount: int):
+        self.score += amount
+
+    def update_lives(self, amount: int):
+        self.lives += amount
+
+
 def initialise_sprites(sprite_handler):
-    for i in range(4):
+    for _ in range(4):
         asteroid = Asteroid()
         sprite_handler.all_sprites.add(asteroid)
         sprite_handler.asteroids.add(asteroid)
 
-    for i in range(4):
+    for _ in range(4):
         enemy = Enemy()
         sprite_handler.all_sprites.add(enemy)
         sprite_handler.enemies.add(enemy)
@@ -72,7 +89,11 @@ def main():
     clock = pygame.time.Clock()
     running = True
 
-    sprite_handler = SpriteHandler(screen)
+    # game logic handler
+    game_state_handler = GameStateHandler()
+
+    # sprites
+    sprite_handler = SpriteHandler(screen, game_state_handler)
     spaceship = Spaceship(screen, sprite_handler)
     sprite_handler.all_sprites.add(spaceship)
 
