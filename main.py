@@ -56,6 +56,18 @@ class SpriteHandler():
         self.asteroids.add(asteroid)
 
 
+def initialise_sprites(sprite_handler):
+    for i in range(4):
+        asteroid = Asteroid()
+        sprite_handler.all_sprites.add(asteroid)
+        sprite_handler.asteroids.add(asteroid)
+
+    for i in range(4):
+        enemy = Enemy()
+        sprite_handler.all_sprites.add(enemy)
+        sprite_handler.enemies.add(enemy)
+
+
 def main():
     clock = pygame.time.Clock()
     running = True
@@ -63,6 +75,8 @@ def main():
     sprite_handler = SpriteHandler(screen)
     spaceship = Spaceship(screen, sprite_handler)
     sprite_handler.all_sprites.add(spaceship)
+
+    initialise_sprites(sprite_handler)
 
     while running:
         clock.tick(60)  # Limit FPS to 60
