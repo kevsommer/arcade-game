@@ -17,6 +17,14 @@ clock = pygame.time.Clock()
 space_background = pygame.image.load(
     os.path.join("assets", "space_background.jpeg"))
 
+# Set up the font
+font_size = 36
+font = pygame.font.Font(None, font_size)
+
+# Set up the text and color
+text_color = (255, 255, 255)  # White color
+bg_color = (0, 0, 0)  # Black background color
+
 
 class SpriteHandler():
     def __init__(self, screen, game_state_handler) -> None:
