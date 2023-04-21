@@ -85,6 +85,13 @@ def initialise_sprites(sprite_handler):
         sprite_handler.enemies.add(enemy)
 
 
+def draw_text(text, font, color, surface, x, y):
+    textobj = font.render(text, 1, color)
+    textrect = textobj.get_rect()
+    textrect.topleft = (x, y)
+    surface.blit(textobj, textrect)
+
+
 def main():
     clock = pygame.time.Clock()
     running = True
@@ -129,6 +136,10 @@ def main():
         # Draw game objects
         screen.fill((0, 0, 0))
         screen.blit(space_background, (0, 0))
+
+        # Draw the text surface on the screen
+        text = f"Score: {game_state_handler.score}"
+        draw_text(text, font, text_color, screen, 10, 10)
 
         sprite_handler.draw()
 
