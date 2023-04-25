@@ -17,16 +17,16 @@ WHITE = (255, 255, 255)
 
 # Load Images
 space_background = pygame.image.load(
-    os.path.join("assets", "space_background.jpeg"))
+    os.path.join("assets", "space_background_SLSOS.png"))
 
-asteroid_img = pygame.image.load(
-    os.path.join("assets", "asteroid.png"))
+asteroid_img = pygame.transform.scale_by(pygame.image.load(
+    os.path.join("assets", "asteroid.png")), 0.5)
 
 bullet_img = pygame.image.load(
     os.path.join("assets", "bullet.png"))
 
-enemy_img = pygame.image.load(
-    os.path.join("assets", "enemy.png"))
+enemy_img = pygame.transform.scale_by(pygame.image.load(
+    os.path.join("assets", "enemy.png")), 0.5)
 
-spaceship_img = pygame.image.load(
-    os.path.join("assets", "spaceship.png"))
+spaceship_img = pygame.transform.scale_by(pygame.image.load(
+    os.path.join("assets", "spaceship.png")), 0.5)
