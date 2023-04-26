@@ -22,8 +22,8 @@ space_background = pygame.image.load(
 asteroid_img = pygame.transform.scale_by(pygame.image.load(
     os.path.join("assets", "asteroid.png")), 0.5)
 
-bullet_img = pygame.image.load(
-    os.path.join("assets", "bullet.png"))
+bullet_img = pygame.transform.scale_by(pygame.image.load(
+    os.path.join("assets", "bullet.png")), 0.125)
 
 enemy_img = pygame.transform.scale_by(pygame.image.load(
     os.path.join("assets", "enemy.png")), 0.5)
