@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 
 # Load images
 space_background = pygame.image.load(
-    os.path.join("assets", "space_background.jpeg"))
+    os.path.join("assets", "space_background_chimera.png"))
 
 # Set up the font
 font_size = 36
@@ -73,12 +73,16 @@ class GameStateHandler():
     def __init__(self) -> None:
         self.score = 0
         self.lives = 3
+        self.background_pos = -2200
 
     def update_score(self, amount: int):
         self.score += amount
 
     def update_lives(self, amount: int):
         self.lives += amount
+
+    def update_background_position(self):
+        self.background_pos += 0.5
 
 
 def initialise_sprites(sprite_handler):
@@ -126,6 +130,8 @@ def main():
         sprite_handler.update()
         spaceship.update()
 
+        game_state_handler.update_background_position()
+
         current_time = pygame.time.get_ticks()
         if current_time % 1000 == 0:
             enemy = Enemy()
@@ -143,7 +149,7 @@ def main():
 
         # Draw game objects
         screen.fill((0, 0, 0))
-        screen.blit(space_background, (0, 0))
+        screen.blit(space_background, (0, game_state_handler.background_pos))
 
         # Draw the text surface on the screen
         text = f"Score: {game_state_handler.score}"
