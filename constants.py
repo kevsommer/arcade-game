@@ -17,7 +17,7 @@ WHITE = (255, 255, 255)
 
 # Load Images
 space_background = pygame.image.load(
-    os.path.join("assets", "space_background_SLSOS.png"))
+    os.path.join("assets", "space_background_chimera.png"))
 
 asteroid_img = pygame.transform.scale_by(pygame.image.load(
     os.path.join("assets", "asteroid.png")), 0.5)

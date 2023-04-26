@@ -13,10 +13,6 @@ pygame.display.set_caption("Spaceship Shoot 'em Up")
 # Set minimum time between bullet spawns (in milliseconds)
 clock = pygame.time.Clock()
 
-# Load images
-space_background = pygame.image.load(
-    os.path.join("assets", "space_background_chimera.png"))
-
 # Set up the font
 font_size = 36
 font = pygame.font.Font(None, font_size)
