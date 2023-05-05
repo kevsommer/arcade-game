@@ -69,6 +69,10 @@ class GameStateHandler():
         self.score = 0
         self.lives = 3
         self.background_pos = -2200
+        self.ammunition = 100
+
+    def set_sprite_handler(self, sprite_handler):
+        self.sprite_handler = sprite_handler
 
     def update_score(self, amount: int):
         self.score += amount
@@ -108,7 +112,7 @@ def main():
 
     # sprites
     sprite_handler = SpriteHandler(screen, game_state_handler)
-    spaceship = Spaceship(screen, sprite_handler)
+    spaceship = Spaceship(screen, sprite_handler, game_state_handler=game_state_handler)
     sprite_handler.all_sprites.add(spaceship)
 
     initialise_sprites(sprite_handler)
@@ -149,6 +153,11 @@ def main():
         # Draw the text surface on the screen
         text = f"Score: {game_state_handler.score}"
         draw_text(text, font, text_color, screen, 10, 10)
+        
+        # Draw the ammunition on the screen
+        text = f"Ammunition: {game_state_handler.ammunition}"
+        draw_text(text, font, text_color, screen, 10, 50)
+
 
         sprite_handler.draw()
 
