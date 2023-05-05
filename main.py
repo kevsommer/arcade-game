@@ -30,7 +30,6 @@ class SpriteHandler():
         self.bullets = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
         self.asteroids = pygame.sprite.Group()
-        self.spaceship = Spaceship(screen, self)
         self.game_state_handler = game_state_handler
 
     def draw(self):
