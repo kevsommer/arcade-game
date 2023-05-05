@@ -69,6 +69,9 @@ class GameStateHandler():
         self.score = 0
         self.lives = 3
         self.background_pos = -2200
+        self.sprite_handler = None
+        self.next_enemy_spawn_time = pygame.time.get_ticks() + 5000
+        self.next_asteroid_spawn_time = pygame.time.get_ticks() + 5000
         self.ammunition = 100
 
     def set_sprite_handler(self, sprite_handler):
@@ -83,6 +86,19 @@ class GameStateHandler():
     def update_background_position(self):
         self.background_pos += 0.5
 
+    def spawn_enemies(self):
+        for _ in range(random.randint(1, 3)):
+            enemy = Enemy()
+            self.sprite_handler.add_enemy(enemy)
+        
+        self.next_enemy_spawn_time += 5000
+
+    def spawn_asteroids(self):
+        for _ in range(random.randint(1, 3)):
+            asteroid = Asteroid()
+            self.sprite_handler.add_asteroid(asteroid)
+
+        self.next_asteroid_spawn_time += 5000
 
 def initialise_sprites(sprite_handler):
     for _ in range(4):
@@ -112,6 +128,7 @@ def main():
 
     # sprites
     sprite_handler = SpriteHandler(screen, game_state_handler)
+    game_state_handler.set_sprite_handler(sprite_handler)
     spaceship = Spaceship(screen, sprite_handler, game_state_handler=game_state_handler)
     sprite_handler.all_sprites.add(spaceship)
 
@@ -132,10 +149,11 @@ def main():
         game_state_handler.update_background_position()
 
         current_time = pygame.time.get_ticks()
-        if current_time % 1000 == 0:
-            enemy = Enemy()
-            sprite_handler.all_sprites.add(enemy)
-            sprite_handler.enemies.add(enemy)
+        if current_time > game_state_handler.next_enemy_spawn_time:
+            game_state_handler.spawn_enemies()
+
+        if current_time > game_state_handler.next_asteroid_spawn_time:
+            game_state_handler.spawn_asteroids()
 
         collided_with_enemy = pygame.sprite.spritecollide(
             spaceship, sprite_handler.enemies, False)
