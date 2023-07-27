@@ -30,7 +30,6 @@ def initialise_game(screen: pygame.Surface):
 
     # sprites
     sprite_handler = SpriteHandler(screen, game_state_handler)
-    game_state_handler.set_sprite_handler(sprite_handler)
     spaceship = Spaceship(screen, sprite_handler, game_state_handler=game_state_handler)
     sprite_handler.all_sprites.add(spaceship)
 
