@@ -1,9 +1,9 @@
 class GameStateHandler():
     def __init__(self) -> None:
-        self.score = 0
-        self.lives = 3
-        self.background_pos = -2200
-        self.ammunition = 100
+        self.score: int = 0
+        self.lives: int = 3
+        self.background_pos: float = -2200
+        self.ammunition: int = 100
 
     def update_score(self, amount: int):
         self.score += amount
