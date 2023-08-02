@@ -15,47 +15,31 @@ font_size = 36
 font = pygame.font.Font(None, font_size)
 
 def main():
-    running = True
-    clock, game_state_handler, sprite_handler, spaceship, spawnHandler = initialise_game(screen)
+    clock, gameStateHandler, spriteHandler, spawnHandler = initialise_game(screen)
 
-    while running:
+    while gameStateHandler.running:
         clock.tick(60)  # Limit FPS to 60
 
         # Handle input
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                gameStateHandler.running = False
 
         # Update game objects
         spawnHandler.update()
-        sprite_handler.update()
-        spaceship.update()
-
-        game_state_handler.update_background_position()
-
-        collided_with_enemy = pygame.sprite.spritecollide(
-            spaceship, sprite_handler.enemies, False)
-
-        collided_with_asteroid = pygame.sprite.spritecollide(
-            spaceship, sprite_handler.asteroids, False)
-
-        if collided_with_enemy or collided_with_asteroid:
-            running = False
+        spriteHandler.update()
+        gameStateHandler.update()
 
         # Draw game objects
         screen.fill((0, 0, 0))
-        screen.blit(space_background, (0, game_state_handler.background_pos))
+        screen.blit(space_background, (0, gameStateHandler.background_pos))
 
         # Draw the text surface on the screen
-        text = f"Score: {game_state_handler.score}"
-        draw_text(text, font, WHITE, screen, 10, 10)
-        
-        # Draw the ammunition on the screen
-        text = f"Ammunition: {game_state_handler.ammunition}"
-        draw_text(text, font, WHITE, screen, 10, 50)
+        draw_text(f"Score: {gameStateHandler.score}", font, WHITE, screen, 10, 10)
+        draw_text(f"Ammunition: {gameStateHandler.ammunition}", font, WHITE, screen, 10, 50)
+        draw_text(f"Lives: {gameStateHandler.lives}", font, WHITE, screen, 10, 90)
 
-
-        sprite_handler.draw()
+        spriteHandler.draw()
 
         pygame.display.flip()
 

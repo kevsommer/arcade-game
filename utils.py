@@ -23,9 +23,7 @@ def initialise_game(screen: pygame.Surface):
     # sprites
     spriteHandler = SpriteHandler(screen, gameStateHandler)
     spawnHandler = SpawnHandler(spriteHandler)
-    spaceship = Spaceship(screen, spriteHandler, gameStateHandler=gameStateHandler)
-    spriteHandler.all_sprites.add(spaceship)
 
     initialise_sprites(spawnHandler=spawnHandler)
 
-    return  clock, gameStateHandler, spriteHandler, spaceship, spawnHandler
+    return  clock, gameStateHandler, spriteHandler, spawnHandler
