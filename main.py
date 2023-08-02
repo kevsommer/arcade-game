@@ -27,17 +27,11 @@ def main():
                 running = False
 
         # Update game objects
+        spawnHandler.update()
         sprite_handler.update()
         spaceship.update()
 
         game_state_handler.update_background_position()
-
-        current_time = pygame.time.get_ticks()
-        if current_time > spawnHandler.next_enemy_spawn_time:
-            spawnHandler.spawn_enemies()
-
-        if current_time > spawnHandler.next_asteroid_spawn_time:
-            spawnHandler.spawn_asteroids()
 
         collided_with_enemy = pygame.sprite.spritecollide(
             spaceship, sprite_handler.enemies, False)

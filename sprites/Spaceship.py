@@ -3,12 +3,12 @@ from sprites.Bullet import Bullet
 
 
 class Spaceship(pygame.sprite.Sprite):
-    def __init__(self, screen, sprite_handler, game_state_handler):
+    def __init__(self, screen, spriteHandler, gameStateHandler):
         super().__init__()
         self.image = spaceship_img
         self.screen = screen
-        self.sprite_handler = sprite_handler
-        self.game_state_handler = game_state_handler
+        self.spriteHandler = spriteHandler
+        self.gameStateHandler = gameStateHandler
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH // 2, HEIGHT - 50)
         # Initialize timer for bullet spawning
@@ -31,7 +31,7 @@ class Spaceship(pygame.sprite.Sprite):
                 self.last_bullet_time = current_time
 
                 bullet = Bullet(self.rect.centerx, self.rect.top)
-                self.sprite_handler.add_bullet(bullet)
-                self.game_state_handler.ammunition -= 1
+                self.spriteHandler.add_bullet(bullet)
+                self.gameStateHandler.ammunition -= 1
 
         self.rect.clamp_ip(self.screen.get_rect())

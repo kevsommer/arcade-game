@@ -25,3 +25,10 @@ class SpawnHandler():
 
         self.next_asteroid_spawn_time += 5000
     
+    def update(self) -> None: 
+        current_time = pygame.time.get_ticks()
+        if current_time > self.next_enemy_spawn_time:
+            self.spawn_enemies()
+
+        if current_time > self.next_asteroid_spawn_time:
+            self.spawn_asteroids()
