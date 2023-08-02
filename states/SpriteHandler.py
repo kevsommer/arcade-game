@@ -38,24 +38,28 @@ class SpriteHandler():
         self.all_sprites.add(bullet)
         self.bullets.add(bullet)
 
-    def add_enemy(self):
-        enemy = Enemy()
+    def add_enemy(self, x: int):
+        enemy = Enemy(x)
         self.all_sprites.add(enemy)
         self.enemies.add(enemy)
 
-    def add_asteroid(self):
-        asteroid = Asteroid()
+    def add_asteroid(self, x: int):
+        asteroid = Asteroid(x)
         self.all_sprites.add(asteroid)
         self.asteroids.add(asteroid)
 
     def spawn_enemies(self):
-        for _ in range(random.randint(1, 3)):
-            self.add_enemy()
+        n_enemies = random.randint(1, 3)
+        positions = random.sample(range(8), n_enemies)
+        for pos in positions:
+            self.add_enemy(pos * 100)
         
         self.next_enemy_spawn_time += 5000
 
     def spawn_asteroids(self):
-        for _ in range(random.randint(1, 3)):
-            self.add_asteroid()
+        n_asteroids = random.randint(1, 3)
+        positions = random.sample(range(8), n_asteroids)
+        for pos in positions:
+            self.add_asteroid(pos * 100)
 
         self.next_asteroid_spawn_time += 5000
