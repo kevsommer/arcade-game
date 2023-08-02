@@ -1,5 +1,6 @@
 from constants import *
 from utils import draw_text, initialise_game
+from states.SpawnHandler import SpawnHandler
 
 
 # Initialize Pygame
@@ -15,7 +16,7 @@ font = pygame.font.Font(None, font_size)
 
 def main():
     running = True
-    clock, game_state_handler, sprite_handler, spaceship = initialise_game(screen)
+    clock, game_state_handler, sprite_handler, spaceship, spawnHandler = initialise_game(screen)
 
     while running:
         clock.tick(60)  # Limit FPS to 60
@@ -32,11 +33,11 @@ def main():
         game_state_handler.update_background_position()
 
         current_time = pygame.time.get_ticks()
-        if current_time > sprite_handler.next_enemy_spawn_time:
-            sprite_handler.spawn_enemies()
+        if current_time > spawnHandler.next_enemy_spawn_time:
+            spawnHandler.spawn_enemies()
 
-        if current_time > sprite_handler.next_asteroid_spawn_time:
-            sprite_handler.spawn_asteroids()
+        if current_time > spawnHandler.next_asteroid_spawn_time:
+            spawnHandler.spawn_asteroids()
 
         collided_with_enemy = pygame.sprite.spritecollide(
             spaceship, sprite_handler.enemies, False)

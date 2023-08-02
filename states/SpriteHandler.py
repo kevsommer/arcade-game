@@ -1,18 +1,16 @@
 import pygame
 from sprites.Asteroid import Asteroid
 from sprites.Enemy import Enemy
-import random
+from states.GameStateHandler import GameStateHandler
 
 class SpriteHandler():
-    def __init__(self, screen, game_state_handler) -> None:
+    def __init__(self, screen: pygame.Surface, game_state_handler: GameStateHandler) -> None:
         self.screen = screen
 
         self.all_sprites = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
         self.asteroids = pygame.sprite.Group()
-        self.next_enemy_spawn_time = pygame.time.get_ticks() + 5000
-        self.next_asteroid_spawn_time = pygame.time.get_ticks() + 5000
         self.game_state_handler = game_state_handler
 
     def draw(self):
@@ -47,19 +45,3 @@ class SpriteHandler():
         asteroid = Asteroid(x)
         self.all_sprites.add(asteroid)
         self.asteroids.add(asteroid)
-
-    def spawn_enemies(self):
-        n_enemies = random.randint(1, 3)
-        positions = random.sample(range(8), n_enemies)
-        for pos in positions:
-            self.add_enemy(pos * 100)
-        
-        self.next_enemy_spawn_time += 5000
-
-    def spawn_asteroids(self):
-        n_asteroids = random.randint(1, 3)
-        positions = random.sample(range(8), n_asteroids)
-        for pos in positions:
-            self.add_asteroid(pos * 100)
-
-        self.next_asteroid_spawn_time += 5000

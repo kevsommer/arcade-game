@@ -2,6 +2,7 @@ import pygame
 import random
 from states.GameStateHandler import GameStateHandler
 from states.SpriteHandler import SpriteHandler
+from states.SpawnHandler import SpawnHandler
 from sprites.Spaceship import Spaceship
 from sprites.Asteroid import Asteroid
 from sprites.Enemy import Enemy
@@ -33,9 +34,10 @@ def initialise_game(screen: pygame.Surface):
 
     # sprites
     sprite_handler = SpriteHandler(screen, game_state_handler)
+    spawnHandler = SpawnHandler(sprite_handler)
     spaceship = Spaceship(screen, sprite_handler, game_state_handler=game_state_handler)
     sprite_handler.all_sprites.add(spaceship)
 
     initialise_sprites(sprite_handler)
 
-    return  clock, game_state_handler, sprite_handler, spaceship
+    return  clock, game_state_handler, sprite_handler, spaceship, spawnHandler
