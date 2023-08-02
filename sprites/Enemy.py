@@ -2,11 +2,11 @@ from constants import *
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x: int):
         super().__init__()
         self.image = enemy_img
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, WIDTH - self.rect.width)
+        self.rect.x = x
         self.rect.y = random.randint(-100, -50)
 
     def update(self):

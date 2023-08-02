@@ -1,4 +1,5 @@
 import pygame
+import random
 from states.GameStateHandler import GameStateHandler
 from states.SpriteHandler import SpriteHandler
 from sprites.Spaceship import Spaceship
@@ -12,13 +13,15 @@ def draw_text(text, font, color, surface, x, y):
     surface.blit(textobj, textrect)
 
 def initialise_sprites(sprite_handler):
-    for _ in range(4):
-        asteroid = Asteroid()
+    positions = random.sample(range(8), 4)
+    for pos in positions:
+        asteroid = Asteroid(pos * 100)
         sprite_handler.all_sprites.add(asteroid)
         sprite_handler.asteroids.add(asteroid)
 
-    for _ in range(4):
-        enemy = Enemy()
+    positions = random.sample(range(8), 4)
+    for pos in positions:
+        enemy = Enemy(pos * 100)
         sprite_handler.all_sprites.add(enemy)
         sprite_handler.enemies.add(enemy)
 
