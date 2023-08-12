@@ -1,6 +1,7 @@
 import pygame
 from sprites.Spaceship import Spaceship
 from sprites.Asteroid import Asteroid
+from sprites.Explosion import Explosion
 from sprites.Enemy import Enemy
 from states.GameStateHandler import GameStateHandler
 
@@ -29,12 +30,20 @@ class SpriteHandler():
         asteroid_collisions = pygame.sprite.groupcollide(
             self.bullets, self.asteroids, True, True)
 
-        self.gameStateHandler.score += len(asteroid_collisions)
+        for asteroid in asteroid_collisions:
+            # Spawn an explosion at the asteroid's position
+            explosion = Explosion(x=asteroid.rect.x, y=asteroid.rect.y, type="asteroid")
+            self.all_sprites.add(explosion)
+            self.gameStateHandler.score += 2
 
         enemy_collisions = pygame.sprite.groupcollide(
             self.bullets, self.enemies, True, True)
-
-        self.gameStateHandler.score += len(enemy_collisions) * 2
+        
+        for enemy in enemy_collisions:
+            # Spawn an explosion at the enemy's position
+            explosion = Explosion(x=enemy.rect.x, y=enemy.rect.y, type="enemy")
+            self.all_sprites.add(explosion)
+            self.gameStateHandler.score += 2
 
         collision_with_enemy = pygame.sprite.spritecollide(
             self.spaceship, self.enemies, True)
@@ -58,3 +67,7 @@ class SpriteHandler():
         asteroid = Asteroid(x)
         self.all_sprites.add(asteroid)
         self.asteroids.add(asteroid)
+    
+    def add_explosion(self, x: int, y: int):
+        explosion = Explosion(x, y)
+        self.all_sprites.add(explosion)
