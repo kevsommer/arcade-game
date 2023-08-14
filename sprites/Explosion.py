@@ -1,7 +1,7 @@
 from constants import *
 
 class Explosion(pygame.sprite.Sprite):
-    def __init__(self, x, y, type: str):
+    def __init__(self, center, type: str):
         super().__init__()
         self.images = []
         for i in range(8):
@@ -10,7 +10,7 @@ class Explosion(pygame.sprite.Sprite):
             self.images.append(img)
         self.image = self.images[0]
         self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
+        self.rect.center = center
         self.counter = 0
         self.index = 0
     
