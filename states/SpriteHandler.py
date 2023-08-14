@@ -11,6 +11,7 @@ class SpriteHandler():
 
         self.all_sprites = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
+        self.enemy_bullets = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
         self.asteroids = pygame.sprite.Group()
 
@@ -25,24 +26,20 @@ class SpriteHandler():
         self.all_sprites.update()
         self.check_collisions()
 
+
     def check_collisions(self):
-        # Check for collisions
         asteroid_collisions = pygame.sprite.groupcollide(
             self.bullets, self.asteroids, True, True)
 
         for asteroid in asteroid_collisions:
-            # Spawn an explosion at the asteroid's position
-            explosion = Explosion(x=asteroid.rect.x, y=asteroid.rect.y, type="asteroid")
-            self.all_sprites.add(explosion)
+            self.add_explosion(center=asteroid.rect.center, type='asteroid')
             self.gameStateHandler.score += 2
 
         enemy_collisions = pygame.sprite.groupcollide(
             self.bullets, self.enemies, True, True)
         
         for enemy in enemy_collisions:
-            # Spawn an explosion at the enemy's position
-            explosion = Explosion(x=enemy.rect.x, y=enemy.rect.y, type="enemy")
-            self.all_sprites.add(explosion)
+            self.add_explosion(center=enemy.rect.center, type='enemy')
             self.gameStateHandler.score += 2
 
         collision_with_enemy = pygame.sprite.spritecollide(
@@ -55,11 +52,14 @@ class SpriteHandler():
             self.gameStateHandler.lives -= 1
 
     def add_bullet(self, bullet):
+        if (bullet.type == 'player'):
+            self.bullets.add(bullet)
+        else:
+            self.enemy_bullets.add(bullet)
         self.all_sprites.add(bullet)
-        self.bullets.add(bullet)
 
     def add_enemy(self, x: int):
-        enemy = Enemy(x)
+        enemy = Enemy(x, spriteHandler=self)
         self.all_sprites.add(enemy)
         self.enemies.add(enemy)
 
@@ -68,6 +68,6 @@ class SpriteHandler():
         self.all_sprites.add(asteroid)
         self.asteroids.add(asteroid)
     
-    def add_explosion(self, x: int, y: int):
-        explosion = Explosion(x, y)
+    def add_explosion(self, center, type: str):
+        explosion = Explosion(center=center, type=type)
         self.all_sprites.add(explosion)

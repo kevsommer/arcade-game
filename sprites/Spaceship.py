@@ -30,7 +30,7 @@ class Spaceship(pygame.sprite.Sprite):
             if current_time - self.last_bullet_time > MIN_BULLET_INTERVAL:
                 self.last_bullet_time = current_time
 
-                bullet = Bullet(self.rect.centerx, self.rect.top)
+                bullet = Bullet(self.rect.centerx, self.rect.top, type='player')
                 self.spriteHandler.add_bullet(bullet)
                 self.gameStateHandler.ammunition -= 1
 
