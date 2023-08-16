@@ -1,10 +1,14 @@
 from constants import *
 
+player_bullet_img = pygame.transform.scale(pygame.image.load(
+    os.path.join("assets", "bullet.png")), (20, 20))
+enemy_bullet_img = pygame.transform.scale(pygame.image.load(
+    "assets/enemy_bullet.png"), (20, 20))
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, type='player'):
         super().__init__()
-        self.image = bullet_img
+        self.image = player_bullet_img if type == 'player' else enemy_bullet_img
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.type = type
