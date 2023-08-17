@@ -17,7 +17,7 @@ font_size = 36
 font = pygame.font.Font(None, font_size)
 
 def main():
-    clock, gameStateHandler, spriteHandler, spawnHandler = initialise_game(screen)
+    clock, gameStateHandler, spriteHandler, spawnHandler, collisionHandler = initialise_game(screen)
 
     while gameStateHandler.running:
         clock.tick(60)  # Limit FPS to 60
@@ -28,6 +28,7 @@ def main():
                 gameStateHandler.running = False
 
         # Update game objects
+        collisionHandler.check_collisions()
         spawnHandler.update()
         spriteHandler.update()
         gameStateHandler.update()
