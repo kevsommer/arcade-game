@@ -2,6 +2,7 @@ import pygame
 from states.GameStateHandler import GameStateHandler
 from states.SpriteHandler import SpriteHandler
 from states.SpawnHandler import SpawnHandler
+from states.CollisionHandler import CollisionHandler
 from sprites.Spaceship import Spaceship
 
 def draw_text(text, font, color, surface, x, y):
@@ -23,7 +24,8 @@ def initialise_game(screen: pygame.Surface):
     # sprites
     spriteHandler = SpriteHandler(screen, gameStateHandler)
     spawnHandler = SpawnHandler(spriteHandler)
+    collisionHandler = CollisionHandler(spriteHandler, gameStateHandler)
 
     initialise_sprites(spawnHandler=spawnHandler)
 
-    return  clock, gameStateHandler, spriteHandler, spawnHandler
+    return  clock, gameStateHandler, spriteHandler, spawnHandler, collisionHandler
