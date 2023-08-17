@@ -44,10 +44,11 @@ class SpriteHandler():
         enemy_bullet_collisions = pygame.sprite.spritecollide(
             self.spaceship, self.enemy_bullets, True
         )
-        
-        for bullet in enemy_bullet_collisions: 
-            self.gameStateHandler.lives -= 1
 
+        for collision in enemy_bullet_collisions:
+            self.gameStateHandler.lives -= 1
+            self.spaceship.reset()
+        
         collision_with_enemy = pygame.sprite.spritecollide(
             self.spaceship, self.enemies, True)
 
@@ -56,6 +57,7 @@ class SpriteHandler():
 
         if collision_with_enemy or collision_with_asteroid:
             self.gameStateHandler.lives -= 1
+            self.spaceship.reset()
 
     def add_bullet(self, bullet):
         if (bullet.type == 'player'):

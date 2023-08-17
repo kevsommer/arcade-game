@@ -27,3 +27,5 @@ enemy_img = pygame.transform.scale_by(pygame.image.load(
 
 spaceship_img = pygame.transform.scale_by(pygame.image.load(
     os.path.join("assets", "spaceship.png")), 0.5)
+
+heart_img = pygame.transform.scale(pygame.image.load('assets/heart.png'), (48, 48))

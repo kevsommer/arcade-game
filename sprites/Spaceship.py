@@ -42,3 +42,9 @@ class Spaceship(pygame.sprite.Sprite):
                 self.gameStateHandler.ammunition -= 1
 
         self.rect.clamp_ip(self.screen.get_rect())
+
+    def reset(self):
+        self.spriteHandler.add_explosion(center=self.rect.center, type='enemy')
+        self.image = spaceship_alt_center_img
+        self.rect.center = (WIDTH // 2, HEIGHT - 50)
+        self.last_bullet_time = 0
