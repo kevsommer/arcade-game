@@ -10,9 +10,9 @@ class CollisionHandler():
     def check_collisions(self):
         self.check_player_bullet_collisions()
         self.check_enemy_bullet_collisions()
-        self.check_spaceship_collision()
+        self.check_player_collisions()
 
-    def check_player_bullet_collisions(self):
+    def check_asteroid_p_bullet_collisions(self):
         asteroid_collisions = pygame.sprite.groupcollide(
         self.spriteHandler.bullets, self.spriteHandler.asteroids, True, True)
 
@@ -20,12 +20,17 @@ class CollisionHandler():
             self.spriteHandler.add_explosion(center=asteroid.rect.center, type='asteroid')
             self.gameStateHandler.score += 2
 
+    def check_enemy_p_bullet_collisions(self):
         enemy_collisions = pygame.sprite.groupcollide(
         self.spriteHandler.bullets, self.spriteHandler.enemies, True, True)
 
         for enemy in enemy_collisions:
             self.spriteHandler.add_explosion(center=enemy.rect.center, type='enemy')
             self.gameStateHandler.score += 2
+
+    def check_player_bullet_collisions(self):
+        self.check_asteroid_p_bullet_collisions()
+        self.check_enemy_p_bullet_collisions()
     
     def check_enemy_bullet_collisions(self):
         enemy_bullet_collisions = pygame.sprite.spritecollide(self.spriteHandler.spaceship, self.spriteHandler.enemy_bullets, True)
@@ -33,7 +38,7 @@ class CollisionHandler():
             self.gameStateHandler.lives -= 1
             self.spriteHandler.spaceship.reset()
     
-    def check_spaceship_collision(self):
+    def check_player_collisions(self):
         collision_with_enemy = pygame.sprite.spritecollide(
             self.spriteHandler.spaceship, self.spriteHandler.enemies, True)
 
