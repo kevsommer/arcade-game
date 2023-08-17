@@ -13,5 +13,4 @@ class Asteroid(pygame.sprite.Sprite):
     def update(self):
         self.rect.y += ASTEROID_SPEED
         if self.rect.top > HEIGHT:
-            self.rect.x = random.randint(0, WIDTH - self.rect.width)
-            self.rect.y = random.randint(-200, -100)
+           self.kill() 

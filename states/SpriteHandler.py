@@ -3,6 +3,7 @@ from sprites.Spaceship import Spaceship
 from sprites.Asteroid import Asteroid
 from sprites.Explosion import Explosion
 from sprites.Enemy import Enemy
+from sprites.PowerUp import PowerUp
 from states.GameStateHandler import GameStateHandler
 
 class SpriteHandler():
@@ -14,6 +15,7 @@ class SpriteHandler():
         self.enemy_bullets = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
         self.asteroids = pygame.sprite.Group()
+        self.power_ups = pygame.sprite.Group()
 
         self.spaceship: Spaceship = Spaceship(screen, spriteHandler=self, gameStateHandler=gameStateHandler)
         self.all_sprites.add_internal(self.spaceship)
@@ -24,40 +26,6 @@ class SpriteHandler():
 
     def update(self):
         self.all_sprites.update()
-        self.check_collisions()
-
-    def check_collisions(self):
-        asteroid_collisions = pygame.sprite.groupcollide(
-            self.bullets, self.asteroids, True, True)
-
-        for asteroid in asteroid_collisions:
-            self.add_explosion(center=asteroid.rect.center, type='asteroid')
-            self.gameStateHandler.score += 2
-
-        enemy_collisions = pygame.sprite.groupcollide(
-            self.bullets, self.enemies, True, True)
-        
-        for enemy in enemy_collisions:
-            self.add_explosion(center=enemy.rect.center, type='enemy')
-            self.gameStateHandler.score += 2
-
-        enemy_bullet_collisions = pygame.sprite.spritecollide(
-            self.spaceship, self.enemy_bullets, True
-        )
-
-        for collision in enemy_bullet_collisions:
-            self.gameStateHandler.lives -= 1
-            self.spaceship.reset()
-        
-        collision_with_enemy = pygame.sprite.spritecollide(
-            self.spaceship, self.enemies, True)
-
-        collision_with_asteroid = pygame.sprite.spritecollide(
-            self.spaceship, self.asteroids, True)
-
-        if collision_with_enemy or collision_with_asteroid:
-            self.gameStateHandler.lives -= 1
-            self.spaceship.reset()
 
     def add_bullet(self, bullet):
         if (bullet.type == 'player'):
@@ -79,3 +47,8 @@ class SpriteHandler():
     def add_explosion(self, center, type: str):
         explosion = Explosion(center=center, type=type)
         self.all_sprites.add(explosion)
+
+    def add_power_up(self):
+        power_up = PowerUp()
+        self.power_ups.add(power_up)
+        self.all_sprites.add(power_up)
