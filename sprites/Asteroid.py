@@ -1,5 +1,6 @@
 from constants import *
 
+asteroid_img = pygame.transform.scale(pygame.image.load("assets/asteroid.png"), (50, 50))
 
 class Asteroid(pygame.sprite.Sprite):
     def __init__(self, x):

@@ -14,18 +14,3 @@ MIN_BULLET_INTERVAL = 200
 
 # Colors
 WHITE = (255, 255, 255)
-
-# Load Images
-space_background = pygame.image.load(
-    os.path.join("assets", "space_background_chimera.png"))
-
-asteroid_img = pygame.transform.scale(pygame.image.load(
-    os.path.join("assets", "asteroid.png")), (50, 50))
-
-enemy_img = pygame.transform.scale_by(pygame.image.load(
-    os.path.join("assets", "enemy.png")), 0.5)
-
-spaceship_img = pygame.transform.scale_by(pygame.image.load(
-    os.path.join("assets", "spaceship.png")), 0.5)
-
-heart_img = pygame.transform.scale(pygame.image.load('assets/heart.png'), (48, 48))

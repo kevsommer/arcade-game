@@ -6,6 +6,8 @@ from states.SpawnHandler import SpawnHandler
 # Initialize Pygame
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+heart_img = pygame.transform.scale(pygame.image.load('assets/heart.png'), (48, 48))
+space_background = pygame.image.load("assets/space_background_chimera.png")
 pygame.display.set_caption("Spaceship Shoot 'em Up")
 
 clock = pygame.time.Clock()
@@ -37,7 +39,8 @@ def main():
         # Draw the text surface on the screen
         draw_text(f"Score: {gameStateHandler.score}", font, WHITE, screen, 10, 10)
         draw_text(f"Ammunition: {gameStateHandler.ammunition}", font, WHITE, screen, 10, 50)
-        draw_text(f"Lives: {gameStateHandler.lives}", font, WHITE, screen, 10, 90)
+        for i in range(gameStateHandler.lives):
+            screen.blit(heart_img, (10 + 48 * i, 90))
 
         spriteHandler.draw()
 
