@@ -1,9 +1,7 @@
 from constants import *
 
-player_bullet_img = pygame.transform.scale(pygame.image.load(
-    os.path.join("assets", "bullet.png")), (20, 20))
-enemy_bullet_img = pygame.transform.scale(pygame.image.load(
-    "assets/enemy_bullet.png"), (20, 20))
+player_bullet_img = pygame.transform.scale(pygame.image.load('assets/bullets/player_bullet.png'), (20, 20))
+enemy_bullet_img = pygame.transform.scale(pygame.image.load("assets/bullets/enemy_bullet.png"), (20, 20))
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, type='player'):
