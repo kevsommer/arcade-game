@@ -3,11 +3,11 @@ from sprites.Spaceship import Spaceship
 from sprites.Asteroid import Asteroid
 from sprites.Explosion import Explosion
 from sprites.Enemy import Enemy
+from sprites.GreenEnemy import GreenEnemy
 from sprites.PowerUp import PowerUp
-from states.GameStateHandler import GameStateHandler
 
 class SpriteHandler():
-    def __init__(self, screen: pygame.Surface, gameStateHandler: GameStateHandler) -> None:
+    def __init__(self, screen: pygame.Surface, game) -> None:
         self.screen = screen
 
         self.all_sprites = pygame.sprite.Group()
@@ -16,10 +16,10 @@ class SpriteHandler():
         self.enemies = pygame.sprite.Group()
         self.asteroids = pygame.sprite.Group()
         self.power_ups = pygame.sprite.Group()
+        self.game = game
 
-        self.spaceship: Spaceship = Spaceship(screen, spriteHandler=self, gameStateHandler=gameStateHandler)
+        self.spaceship: Spaceship = Spaceship(screen, game=game)
         self.all_sprites.add_internal(self.spaceship)
-        self.gameStateHandler = gameStateHandler
 
     def draw(self):
         self.all_sprites.draw(self.screen)
