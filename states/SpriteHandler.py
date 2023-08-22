@@ -1,9 +1,11 @@
 import pygame
+import random
 from sprites.Spaceship import Spaceship
 from sprites.Asteroid import Asteroid
 from sprites.Explosion import Explosion
 from sprites.Enemy import Enemy
-from sprites.GreenEnemy import GreenEnemy
+from sprites.AltEnemy import AltEnemy
+from sprites.AsymEnemy import AsymEnemy
 from sprites.PowerUp import PowerUp
 
 class SpriteHandler():
@@ -35,7 +37,7 @@ class SpriteHandler():
         self.all_sprites.add(bullet)
 
     def add_enemy(self, x: int):
-        enemy = Enemy(x, spriteHandler=self)
+        enemy = random.choice([AltEnemy, AsymEnemy, Enemy])(x, spriteHandler=self)
         self.all_sprites.add(enemy)
         self.enemies.add(enemy)
 
