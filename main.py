@@ -35,7 +35,9 @@ def main():
 
         # Draw game objects
         screen.fill((0, 0, 0))
-        screen.blit(space_background, (0, gameStateHandler.background_pos))
+        background_y = gameStateHandler.background_pos % space_background.get_rect().height
+        screen.blit(space_background, (0 - gameStateHandler.camera_offset[0], background_y - space_background.get_rect().height - gameStateHandler.camera_offset[1]))
+        screen.blit(space_background, (0 - gameStateHandler.camera_offset[0], background_y - gameStateHandler.camera_offset[1]))
 
         # Draw the text surface on the screen
         draw_text(f"Score: {gameStateHandler.score}", font, WHITE, screen, 10, 10)

@@ -16,6 +16,7 @@ class CollisionHandler():
         for asteroid in asteroid_collisions:
             self.game.spriteHandler.add_explosion(center=asteroid.rect.center, type='asteroid')
             self.game.gameStateHandler.score += 2
+            self.game.gameStateHandler.shake_camera(5, 2)
 
     def check_enemy_p_bullet_collisions(self):
         enemy_collisions = pygame.sprite.groupcollide(
@@ -24,6 +25,7 @@ class CollisionHandler():
         for enemy in enemy_collisions:
             self.game.spriteHandler.add_explosion(center=enemy.rect.center, type='enemy')
             self.game.gameStateHandler.score += 2
+            self.game.gameStateHandler.shake_camera(5, 2)
 
     def check_player_bullet_collisions(self):
         self.check_asteroid_p_bullet_collisions()
@@ -34,6 +36,7 @@ class CollisionHandler():
         for collision in enemy_bullet_collisions:
             self.game.gameStateHandler.lives -= 1
             self.game.spriteHandler.spaceship.reset()
+            self.game.gameStateHandler.shake_camera(20, 10)
     
     def check_player_collisions(self):
         collision_with_enemy = pygame.sprite.spritecollide(
@@ -45,3 +48,4 @@ class CollisionHandler():
         if collision_with_enemy or collision_with_asteroid:
             self.game.gameStateHandler.lives -= 1
             self.game.spriteHandler.spaceship.reset()
+            self.game.gameStateHandler.shake_camera(20, 10)
