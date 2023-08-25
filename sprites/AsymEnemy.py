@@ -1,5 +1,7 @@
+import math
 from constants import *
 from sprites.Bullet import Bullet
+from sprites.TracingBullet import TracingBullet
 
 enemy_img = pygame.transform.scale_by(pygame.transform.rotate(pygame.image.load("assets/enemy_asym.png"), 180), 1.25)
 
@@ -23,8 +25,5 @@ class AsymEnemy(pygame.sprite.Sprite):
         if current_time - self.last_bullet_time > MIN_BULLET_INTERVAL * 2:
             self.last_bullet_time = current_time
             if (random.random() < 0.1):
-
-                bullet = Bullet(self.rect.centerx - 0.35 * self.rect.width, self.rect.centery, type="enemy")
-                self.spriteHandler.add_bullet(bullet)
-                bullet = Bullet(self.rect.centerx + 0.35 * self.rect.width, self.rect.centery, type="enemy")
+                bullet = TracingBullet(self.spriteHandler.screen, self.spriteHandler.game, self.rect.centerx, self.rect.centery, 0.2, 1000)
                 self.spriteHandler.add_bullet(bullet)

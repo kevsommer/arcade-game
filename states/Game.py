@@ -11,7 +11,7 @@ def initialise_sprites(spawnHandler: SpawnHandler):
 class Game():
     def __init__(self, screen) -> None:
         self.clock = pygame.time.Clock()
-
+        self.dt = 0
         # game logic handler
         self.gameStateHandler = GameStateHandler()
 
