@@ -12,6 +12,7 @@ class Spaceship(pygame.sprite.Sprite):
         self.game = game
 
         self.image = spaceship_alt_center_img
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH // 2, HEIGHT - 50)
         # Initialize timer for bullet spawning
@@ -30,6 +31,7 @@ class Spaceship(pygame.sprite.Sprite):
             self.rect.y -= SPACESHIP_SPEED
         if keys[pygame.K_DOWN]:
             self.rect.y += SPACESHIP_SPEED
+        self.mask = pygame.mask.from_surface(self.image)
 
         if keys[pygame.K_SPACE]:
             current_time = pygame.time.get_ticks()
@@ -45,5 +47,6 @@ class Spaceship(pygame.sprite.Sprite):
     def reset(self):
         self.game.spriteHandler.add_explosion(center=self.rect.center, type='enemy')
         self.image = spaceship_alt_center_img
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect.center = (WIDTH // 2, HEIGHT - 50)
         self.last_bullet_time = 0

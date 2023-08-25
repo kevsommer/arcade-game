@@ -7,6 +7,7 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self, x: int, spriteHandler):
         super().__init__()
         self.image = enemy_img
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = random.randint(-100, -50)

@@ -7,6 +7,7 @@ class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, type='player'):
         super().__init__()
         self.image = player_bullet_img if type == 'player' else enemy_bullet_img
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.type = type
