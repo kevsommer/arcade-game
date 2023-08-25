@@ -1,6 +1,5 @@
 from constants import *
 from utils import draw_text, initialise_game
-from states.SpawnHandler import SpawnHandler
 
 
 # Initialize Pygame
@@ -10,28 +9,22 @@ heart_img = pygame.transform.scale(pygame.image.load('assets/heart.png'), (48, 4
 space_background = pygame.image.load("assets/space_background_chimera.png")
 pygame.display.set_caption("Spaceship Shoot 'em Up")
 
-clock = pygame.time.Clock()
-
 # Set up font
 font_size = 36
 font = pygame.font.Font(None, font_size)
 
 def main():
-    clock, gameStateHandler, spriteHandler, spawnHandler, collisionHandler = initialise_game(screen)
+    gameStateHandler, spriteHandler, game = initialise_game(screen)
 
     while gameStateHandler.running:
-        clock.tick(60)  # Limit FPS to 60
 
         # Handle input
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameStateHandler.running = False
 
-        # Update game objects
-        collisionHandler.check_collisions()
-        spawnHandler.update()
-        spriteHandler.update()
-        gameStateHandler.update()
+        # Update game
+        game.update()
 
         # Draw game objects
         screen.fill((0, 0, 0))

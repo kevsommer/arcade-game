@@ -21,3 +21,11 @@ class Game():
         self.collisionHandler = CollisionHandler(self)
 
         initialise_sprites(spawnHandler=self.spawnHandler)
+
+    def update(self):
+        self.clock.tick(60) # 60 FPS
+        self.dt = self.clock.get_time()
+        self.gameStateHandler.update()
+        self.spriteHandler.update()
+        self.spawnHandler.update()
+        self.collisionHandler.check_collisions()

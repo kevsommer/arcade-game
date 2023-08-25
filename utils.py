@@ -11,4 +11,4 @@ def draw_text(text, font, color, surface, x, y):
 def initialise_game(screen: pygame.Surface):
     game = Game(screen)
 
-    return game.clock, game.gameStateHandler, game.spriteHandler, game.spawnHandler, game.collisionHandler
+    return game.gameStateHandler, game.spriteHandler, game
