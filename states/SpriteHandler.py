@@ -9,9 +9,7 @@ from sprites.AsymEnemy import AsymEnemy
 from sprites.PowerUp import PowerUp
 
 class SpriteHandler():
-    def __init__(self, screen: pygame.Surface, game) -> None:
-        self.screen = screen
-
+    def __init__(self, game) -> None:
         self.all_sprites = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
         self.enemy_bullets = pygame.sprite.Group()
@@ -20,11 +18,11 @@ class SpriteHandler():
         self.power_ups = pygame.sprite.Group()
         self.game = game
 
-        self.spaceship: Spaceship = Spaceship(screen, game=game)
+        self.spaceship: Spaceship = Spaceship(game)
         self.all_sprites.add_internal(self.spaceship)
 
     def draw(self):
-        self.all_sprites.draw(self.screen)
+        self.all_sprites.draw(self.game.screen)
 
     def update(self):
         self.all_sprites.update()

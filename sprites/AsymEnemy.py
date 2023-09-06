@@ -25,5 +25,5 @@ class AsymEnemy(pygame.sprite.Sprite):
         if current_time - self.last_bullet_time > MIN_BULLET_INTERVAL * 2:
             self.last_bullet_time = current_time
             if (random.random() < 0.1):
-                bullet = TracingBullet(self.spriteHandler.screen, self.spriteHandler.game, self.rect.centerx, self.rect.centery, 0.2, 1000)
+                bullet = TracingBullet(self.spriteHandler.game, self.rect.centerx, self.rect.centery, 0.2, 1000)
                 self.spriteHandler.add_bullet(bullet)

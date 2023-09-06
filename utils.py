@@ -8,7 +8,7 @@ def draw_text(text, font, color, surface, x, y):
     textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
     
-def initialise_game(screen: pygame.Surface):
-    game = Game(screen)
+def initialise_game():
+    game = Game()
 
-    return game.gameStateHandler, game.spriteHandler, game
+    return game.gameStateHandler, game

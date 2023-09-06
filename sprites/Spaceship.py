@@ -6,9 +6,8 @@ spaceship_alt_left_img = pygame.transform.scale(pygame.image.load('assets/spaces
 spaceship_alt_right_img = pygame.transform.scale(pygame.image.load('assets/spaceship_alt/spaceship_alt_right.png'), (68, 80))
 
 class Spaceship(pygame.sprite.Sprite):
-    def __init__(self, screen, game):
+    def __init__(self, game):
         super().__init__()
-        self.screen = screen
         self.game = game
 
         self.image = spaceship_alt_center_img
@@ -42,7 +41,7 @@ class Spaceship(pygame.sprite.Sprite):
                 self.game.spriteHandler.add_bullet(bullet)
                 self.game.gameStateHandler.ammunition -= 1
 
-        self.rect.clamp_ip(self.screen.get_rect())
+        self.rect.clamp_ip(self.game.screen.get_rect())
 
     def reset(self):
         self.game.spriteHandler.add_explosion(center=self.rect.center, type='enemy')
