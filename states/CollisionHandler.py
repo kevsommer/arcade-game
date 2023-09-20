@@ -49,3 +49,18 @@ class CollisionHandler():
             self.game.gameStateHandler.lives -= 1
             self.game.spriteHandler.spaceship.reset()
             self.game.gameStateHandler.shake_camera(20, 10)
+
+        collision_with_power_up = pygame.sprite.spritecollide(
+            self.game.spriteHandler.spaceship, self.game.spriteHandler.power_ups, True, collided=pygame.sprite.collide_mask)
+        
+        for collision in collision_with_power_up:
+            if collision.type == "heart":
+                self.game.gameStateHandler.lives += 1
+            elif collision.type == "forcefield":
+                self.game.gameStateHandler.forcefield = True
+            elif collision.type == "coin":
+                self.game.gameStateHandler.score += 10
+            elif collision.type == "ammunition":
+                self.game.gameStateHandler.ammunition += 10
+            else:
+                raise Exception("Invalid powerup type")
