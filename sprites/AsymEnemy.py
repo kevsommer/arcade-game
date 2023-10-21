@@ -3,7 +3,7 @@ from constants import *
 from sprites.Bullet import Bullet
 from sprites.TracingBullet import TracingBullet
 
-enemy_img = pygame.transform.scale_by(pygame.transform.rotate(pygame.image.load("assets/enemy_asym.png"), 180), 1.25)
+enemy_img = pygame.transform.scale_by(pygame.transform.rotate(pygame.image.load("assets/enemies/enemy_asym.png"), 180), 1.25)
 
 class AsymEnemy(pygame.sprite.Sprite):
     def __init__(self, x: int, spriteHandler):

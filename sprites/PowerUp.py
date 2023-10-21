@@ -1,9 +1,9 @@
 from constants import *
 
-heart_bubble_img = pygame.image.load("assets/heart_bubble.png")
-forcefield_bubble_img = pygame.image.load("assets/forcefield_bubble.png")
-coin_img = pygame.image.load("assets/coin.png")
-ammunition_bubble_img = pygame.image.load("assets/ammunition_bubble.png")
+heart_bubble_img = pygame.image.load("assets/bubbles/heart_bubble.png")
+forcefield_bubble_img = pygame.image.load("assets/bubbles/forcefield_bubble.png")
+coin_img = pygame.image.load("assets/bubbles/coin.png")
+ammunition_bubble_img = pygame.image.load("assets/bubbles/ammunition_bubble.png")
 
 def get_img(type):
     if type == "heart":

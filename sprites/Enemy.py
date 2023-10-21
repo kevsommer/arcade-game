@@ -1,7 +1,7 @@
 from constants import *
 from sprites.Bullet import Bullet
 
-enemy_img = pygame.transform.scale(pygame.image.load("assets/enemy.png"), (100, 73))
+enemy_img = pygame.transform.scale(pygame.image.load("assets/enemies/enemy.png"), (100, 73))
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, x: int, spriteHandler):

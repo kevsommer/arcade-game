@@ -1,7 +1,7 @@
 from constants import *
 from sprites.Bullet import Bullet
 
-enemy_img = pygame.transform.scale_by(pygame.transform.rotate(pygame.image.load("assets/enemy_alt.png"), 180), 1.25)
+enemy_img = pygame.transform.scale_by(pygame.transform.rotate(pygame.image.load("assets/enemies/enemy_alt.png"), 180), 1.25)
 
 class AltEnemy(pygame.sprite.Sprite):
     def __init__(self, x: int, spriteHandler):
