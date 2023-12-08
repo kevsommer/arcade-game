@@ -33,7 +33,9 @@ class CollisionHandler():
     
     def check_enemy_bullet_collisions(self):
         enemy_bullet_collisions = pygame.sprite.spritecollide(self.game.spriteHandler.spaceship, self.game.spriteHandler.enemy_bullets, True, collided=pygame.sprite.collide_mask)
-        for collision in enemy_bullet_collisions:
+        for _ in enemy_bullet_collisions:
+            if (self.game.gameStateHandler.forcefield):
+                continue
             self.game.gameStateHandler.lives -= 1
             self.game.spriteHandler.spaceship.reset()
             self.game.gameStateHandler.shake_camera(20, 10)
@@ -46,6 +48,8 @@ class CollisionHandler():
             self.game.spriteHandler.spaceship, self.game.spriteHandler.asteroids, True, collided=pygame.sprite.collide_mask)
 
         if collision_with_enemy or collision_with_asteroid:
+            if (self.game.gameStateHandler.forcefield):
+                return
             self.game.gameStateHandler.lives -= 1
             self.game.spriteHandler.spaceship.reset()
             self.game.gameStateHandler.shake_camera(20, 10)

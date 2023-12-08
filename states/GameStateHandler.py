@@ -7,12 +7,20 @@ class GameStateHandler():
         self.lives: int = 3
         self.background_pos: float = -2200
         self.ammunition: int = 100
+        self.forcefield = True
+        self.forcefield_timer = 0
 
         self.camera_offset = [0, 0]
         self.shake_duration = 0
         self.shake_intensity = 0
 
     def update(self):
+        if self.forcefield:
+            self.forcefield_timer += 1
+            if self.forcefield_timer > 300:
+                self.forcefield = False
+                self.forcefield_timer = 0
+                
         if (self.lives < 0):
             self.running = False
         self.background_pos += 0.5
