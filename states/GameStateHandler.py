@@ -7,7 +7,7 @@ class GameStateHandler():
         self.lives: int = 3
         self.background_pos: float = -2200
         self.ammunition: int = 100
-        self.forcefield = True
+        self.forcefield = False
         self.forcefield_timer = 0
 
         self.camera_offset = [0, 0]

@@ -5,6 +5,8 @@ from states.SpriteHandler import SpriteHandler
 import pygame
 from constants import WHITE, HEIGHT, WIDTH
 
+ammunition_img = pygame.transform.scale(pygame.image.load('assets/bubbles/ammunition.png'), (48, 48))
+coin_img = pygame.transform.scale(pygame.image.load('assets/bubbles/coin.png'), (30, 30))
 heart_img = pygame.transform.scale(pygame.image.load('assets/heart.png'), (48, 48))
 space_background = pygame.image.load("assets/space_background_chimera.png")
 
@@ -73,10 +75,12 @@ class Game():
         self.screen.blit(space_background, (0 - self.gameStateHandler.camera_offset[0], background_y - self.gameStateHandler.camera_offset[1]))
 
         # Draw the text surface on the screen
-        draw_text(f"Score: {self.gameStateHandler.score}", self.font, WHITE, self.screen, 10, 10)
-        draw_text(f"Ammunition: {self.gameStateHandler.ammunition}", self.font, WHITE, self.screen, 10, 50)
+        self.screen.blit(coin_img, (18, 10))
+        draw_text(str(self.gameStateHandler.score), self.font, WHITE, self.screen, 60, 16)
+        self.screen.blit(ammunition_img, (10, 50))
+        draw_text(str(self.gameStateHandler.ammunition), self.font, WHITE, self.screen, 60, 65)
         for i in range(self.gameStateHandler.lives):
-            self.screen.blit(heart_img, (10 + 48 * i, 90))
+            self.screen.blit(heart_img, (10 + 48 * i, 110))
 
         self.spriteHandler.draw()
 
