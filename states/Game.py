@@ -2,6 +2,7 @@ from states.GameStateHandler import GameStateHandler
 from states.SpawnHandler import SpawnHandler
 from states.CollisionHandler import CollisionHandler
 from states.SpriteHandler import SpriteHandler
+from states.Menu import Menu
 import pygame
 from constants import WHITE, HEIGHT, WIDTH
 
@@ -26,12 +27,15 @@ class Game():
         # Initialize Pygame
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.inMenu = True
         pygame.display.set_caption("Spaceship Shoot 'em Up")
 
         self.clock = pygame.time.Clock()
         self.dt = 0
         # game logic handler
         self.gameStateHandler = GameStateHandler()
+
+        self.menu  = Menu(self)
 
         # sprites
         self.spriteHandler = SpriteHandler(self)
@@ -53,8 +57,10 @@ class Game():
                     self.gameStateHandler.running = False
 
             # Update game
-            self.update()
-
+            if not self.inMenu:
+                self.update()
+            else:
+                self.menu.update()
             # Draw screen
             self.draw()
 
@@ -83,5 +89,14 @@ class Game():
             self.screen.blit(heart_img, (10 + 48 * i, 110))
 
         self.spriteHandler.draw()
+
+        keys = pygame.key.get_pressed()
+        if self.inMenu:
+            self.menu.draw(self.screen)
+            if keys[pygame.K_SPACE]:
+                self.inMenu = False
+        else: 
+            if keys[pygame.K_ESCAPE]:
+                self.inMenu = True
 
         pygame.display.flip()
