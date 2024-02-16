@@ -1,6 +1,6 @@
 
 import pygame 
-from constants import HEIGHT, WIDTH
+from constants import HEIGHT, WIDTH, FONT_SIZE
 
 START = 0
 HIGHSCORES = 1
@@ -18,7 +18,7 @@ class Menu:
     def __init__(self, game) -> None:
         self.selected_menu_item = START
         self.menu_items = ["Start", "Highscores", "Quit"]
-        self.font = pygame.font.Font(None, 36)
+        self.font = pygame.font.Font(None, FONT_SIZE)
         self.game = game
 
     def action(self):

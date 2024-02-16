@@ -4,7 +4,7 @@ from states.CollisionHandler import CollisionHandler
 from states.SpriteHandler import SpriteHandler
 from states.Menu import Menu
 import pygame
-from constants import WHITE, HEIGHT, WIDTH
+from constants import WHITE, HEIGHT, WIDTH, FONT_SIZE
 
 ammunition_img = pygame.transform.scale(pygame.image.load('assets/bubbles/ammunition.png'), (48, 48))
 coin_img = pygame.transform.scale(pygame.image.load('assets/bubbles/coin.png'), (30, 30))
@@ -32,20 +32,15 @@ class Game():
 
         self.clock = pygame.time.Clock()
         self.dt = 0
-        # game logic handler
+
         self.gameStateHandler = GameStateHandler()
-
-        self.menu  = Menu(self)
-
-        # sprites
         self.spriteHandler = SpriteHandler(self)
         self.spawnHandler = SpawnHandler(self)
         self.collisionHandler = CollisionHandler(self)
+        self.menu  = Menu(self)
 
         # Set up font
-        font_size = 36
-        self.font = pygame.font.Font(None, font_size)
-
+        self.font = pygame.font.Font(None, FONT_SIZE)
 
         initialise_sprites(spawnHandler=self.spawnHandler)
 
@@ -74,13 +69,13 @@ class Game():
         self.spawnHandler.update()
         self.collisionHandler.check_collisions()
 
-    def draw(self):
+    def draw_background(self):
         self.screen.fill((0, 0, 0))
         background_y = self.gameStateHandler.background_pos % space_background.get_rect().height
         self.screen.blit(space_background, (0 - self.gameStateHandler.camera_offset[0], background_y - space_background.get_rect().height - self.gameStateHandler.camera_offset[1]))
         self.screen.blit(space_background, (0 - self.gameStateHandler.camera_offset[0], background_y - self.gameStateHandler.camera_offset[1]))
 
-        # Draw the text surface on the screen
+    def draw_gui(self):
         self.screen.blit(coin_img, (18, 10))
         draw_text(str(self.gameStateHandler.score), self.font, WHITE, self.screen, 60, 16)
         self.screen.blit(ammunition_img, (10, 50))
@@ -88,8 +83,7 @@ class Game():
         for i in range(self.gameStateHandler.lives):
             self.screen.blit(heart_img, (10 + 48 * i, 110))
 
-        self.spriteHandler.draw()
-
+    def toggle_menu(self):
         keys = pygame.key.get_pressed()
         if self.inMenu:
             self.menu.draw(self.screen)
@@ -98,5 +92,11 @@ class Game():
         else: 
             if keys[pygame.K_ESCAPE]:
                 self.inMenu = True
+
+    def draw(self):
+        self.draw_background()
+        self.draw_gui()
+        self.spriteHandler.draw()
+        self.toggle_menu()
 
         pygame.display.flip()
